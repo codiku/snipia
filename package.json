@@ -1,0 +1,16 @@
+{
+  "name": "snipia",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "bin": {
+    "init": "bin/init.js",
+    "component": "bin/create-component.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "enquirer": "^2.4.1"
+  }
+}
