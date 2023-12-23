@@ -1,7 +1,7 @@
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
 
-const createFile = (folderPath, content) => {
+export const createFile = (folderPath, content) => {
   const foldersAndFile = folderPath.split(path.sep);
   const fileName = foldersAndFile.pop();
   let currentPath = "";
@@ -21,8 +21,4 @@ const createFile = (folderPath, content) => {
   } else {
     console.log(`File already exists: ${filePath}`);
   }
-};
-
-module.exports = {
-  createFile,
 };
