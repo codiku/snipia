@@ -11,9 +11,6 @@ const createFile = (folderPath, content) => {
 
     if (!fs.existsSync(currentPath)) {
       fs.mkdirSync(currentPath);
-      console.log(`Created folder: ${currentPath}`);
-    } else {
-      console.log(`Folder already exists: ${currentPath}`);
     }
   });
 

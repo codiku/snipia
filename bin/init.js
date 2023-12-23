@@ -1,8 +1,7 @@
 #! /usr/bin/env node
 const { prompt } = require("enquirer");
-const path = require("path");
 const { createFile } = require("./libs");
-const fs = require("fs");
+
 const defaultConfig = require("./snipia.json");
 let userConfig = { ...config };
 

@@ -1,3 +1,4 @@
 {
-  "components": "/app/components"
+  "components": "/app/components",
+  "userId":null
 }
