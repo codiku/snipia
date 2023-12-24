@@ -22,3 +22,14 @@ export const createFile = (folderPath, content) => {
     console.log(`File already exists: ${filePath}`);
   }
 };
+
+export const getConfig = () => {
+  try {
+    const userConfig = JSON.parse(
+      fs.readFileSync(path.resolve(process.cwd(), "snipia.json"))
+    );
+    return userConfig;
+  } catch (err) {
+    return null;
+  }
+};
