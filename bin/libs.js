@@ -30,6 +30,9 @@ export const getConfig = () => {
     );
     return userConfig;
   } catch (err) {
-    return null;
+    const defaultConfig = JSON.parse(
+      fs.readFileSync(path.resolve(process.cwd(), "bin/defaultConfig.json"))
+    );
+    return defaultConfig;
   }
 };
