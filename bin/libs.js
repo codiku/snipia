@@ -1,10 +1,14 @@
 import fs from "fs";
 import path from "path";
+import chalk from "chalk";
 
-export const createFile = (folderPath, content) => {
-  const foldersAndFile = folderPath.split(path.sep);
+export const createFile = (folderPath, content = "") => {
+  // Normalize the folder path for cross-platform compatibility
+  const normalizedFolderPath = path.normalize(folderPath);
+
+  const foldersAndFile = normalizedFolderPath.split(path.sep);
   const fileName = foldersAndFile.pop();
-  let currentPath = "";
+  let currentPath = process.cwd();
 
   foldersAndFile.forEach((folder) => {
     currentPath = path.join(currentPath, folder);
@@ -15,24 +19,33 @@ export const createFile = (folderPath, content) => {
   });
 
   const filePath = path.join(currentPath, fileName);
-  if (!fs.existsSync(filePath)) {
-    fs.writeFileSync(filePath, content || "");
-    console.log(`Created file: ${filePath}`);
+
+  // Check if the path is a file or a directory
+  if (path.extname(filePath)) {
+    // It's a file
+    if (!fs.existsSync(filePath)) {
+      fs.writeFileSync(filePath, content);
+      console.log(chalk.green(`Created file: ${filePath}`));
+    } else {
+      console.log(chalk.yellow(`File already exists: ${filePath}`));
+    }
   } else {
-    console.log(`File already exists: ${filePath}`);
+    // It's a directory
+    if (!fs.existsSync(filePath)) {
+      fs.mkdirSync(filePath);
+      console.log(chalk.green(`Created directory: ${filePath}`));
+    } else {
+      console.log(chalk.yellow(`Directory already exists: ${filePath}`));
+    }
   }
 };
 
 export const getConfig = () => {
   try {
-    const userConfig = JSON.parse(
+    return JSON.parse(
       fs.readFileSync(path.resolve(process.cwd(), "snipia.json"))
     );
-    return userConfig;
   } catch (err) {
-    const defaultConfig = JSON.parse(
-      fs.readFileSync(path.resolve(process.cwd(), "bin/defaultConfig.json"))
-    );
-    return defaultConfig;
+    return null;
   }
 };

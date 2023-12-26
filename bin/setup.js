@@ -4,24 +4,24 @@ import fs from "fs";
 import path from "path";
 
 export async function setup() {
-  const defaultConfig = JSON.parse(
-    fs.readFileSync(path.resolve(process.cwd(), "bin/default-config.json"))
-  );
-  let userConfig = { ...defaultConfig };
+  let config = {
+    components: "/app/components",
+    userId: null,
+  };
 
   const { userId } = await enquirer.prompt({
     type: "input",
     name: "userId",
     message: `What is your snipia userId ? (Top right corner in snipia when signed in) )`,
   });
-  userConfig.userId = userId;
-  const { componentPath } = await prompt({
+  config.userId = userId;
+  const { componentPath } = await enquirer.prompt({
     type: "input",
     name: "componentPath",
     message: `Where is the components folder located ?)`,
-    initial: defaultConfig.components,
+    initial: config.components,
   });
-  userConfig.components = componentPath;
+  config.components = componentPath;
 
-  createFile("snipia.json", JSON.stringify(userConfig));
+  createFile("snipia.json", JSON.stringify(config));
 }

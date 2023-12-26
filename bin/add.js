@@ -22,30 +22,28 @@ export async function add() {
       );
     }
 
-    try {
-      const response = await fetch(
-        `http://localhost:3000/api/snippets/?name=${componentName}&userId=${userConfig.userId}`
-      ).then((response) => response.json());
+    let headers = {
+      Accept: "*/*",
+    };
+    const response = await fetch(
+      `http://localhost:3000/api/snippets/?name=${componentName}&userId=${userConfig.userId}`,
+      { headers }
+    ).then((response) => response.json());
 
-      if (response.data.length === 0) {
-        throw new Error(
-          "Could not find a snippet named ",
-          componentName,
-          " for userId ",
-          userConfig.userId
-        );
-      }
-      const content = response.data[0].content;
-      if (!fileName) {
-        clipboardy.writeSync(content);
-        console.log(charlk.green("Code copied into clipboard"));
-      } else {
-        createFile(userConfig.components + "/" + fileName, content);
-      }
-    } catch (err) {
-      console.error(
-        chalk.red("Something went wrong trying to fetch the snippets.")
+    if (response.error || response.data.length === 0) {
+      throw new Error(
+        "Could not find a snippet named ",
+        componentName,
+        " for userId ",
+        userConfig.userId
       );
+    }
+    const content = response.data[0].content;
+    if (!fileName) {
+      clipboardy.writeSync(content);
+      console.log(chalk.white.bgGreen("Code copied into clipboard"));
+    } else {
+      createFile(userConfig.components + "/" + fileName, content);
     }
   } catch (err) {
     console.error(chalk.red(err.message));
