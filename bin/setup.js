@@ -1,5 +1,7 @@
 import enquirer from "enquirer";
 import { createFile } from "./libs.js";
+import fs from "fs";
+import path from "path";
 
 export async function setup() {
   const defaultConfig = JSON.parse(
