@@ -25,7 +25,7 @@ export const createFile = (folderPath, content = "") => {
     // It's a file
     if (!fs.existsSync(filePath)) {
       fs.writeFileSync(filePath, content);
-      console.log(chalk.green(`Created file: ${filePath}`));
+      console.log(chalk.white.bgGreen(`Created file: ${filePath}`));
     } else {
       console.log(chalk.yellow(`File already exists: ${filePath}`));
     }
