@@ -26,7 +26,7 @@ export async function add() {
       Accept: "*/*",
     };
     const response = await fetch(
-      `http://localhost:3000/api/snippets/?name=${componentName}&userId=${userConfig.userId}`,
+      `https://snipia.vercel.app/api/snippets/?name=${componentName}&userId=${userConfig.userId}`,
       { headers }
     ).then((response) => response.json());
 
