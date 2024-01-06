@@ -32,10 +32,10 @@ export async function add() {
 
     if (response.error || response.data.length === 0) {
       throw new Error(
-        "Could not find a snippet named ",
-        componentName,
-        " for userId ",
-        userConfig.userId
+        "Could not find a snippet named " +
+          componentName +
+          " for userId " +
+          userConfig.userId
       );
     }
     const content = response.data[0].content;
