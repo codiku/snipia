@@ -35,7 +35,8 @@ export async function add() {
         "Could not find a snippet named " +
           componentName +
           " for userId " +
-          userConfig.userId
+          userConfig.userId +
+          " (Check your snipia.json)"
       );
     }
     const content = response.data[0].content;

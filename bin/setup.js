@@ -1,18 +1,16 @@
 import enquirer from "enquirer";
 import { createFile } from "./libs.js";
-import fs from "fs";
-import path from "path";
 
 export async function setup() {
   let config = {
-    components: "/app/components",
+    components: "/",
     userId: null,
   };
 
   const { userId } = await enquirer.prompt({
     type: "input",
     name: "userId",
-    message: `What is your snipia userId ? (Top right corner in snipia when signed in) )`,
+    message: `What is your snipia userId ? (Find it a the top right corner in snipia.vercel.app when signed-in) )`,
   });
   config.userId = userId;
   const { componentPath } = await enquirer.prompt({
