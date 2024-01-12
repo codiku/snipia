@@ -5,7 +5,7 @@ import chalk from "chalk";
 export async function add() {
   const action = process.argv[2];
   const componentName = process.argv[3];
-  const fileName = process.argv[4];
+  let fileName = process.argv[4];
   const userConfig = getConfig();
   try {
     if (!userConfig?.userId) {
