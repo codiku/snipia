@@ -44,7 +44,10 @@ export async function add() {
       clipboardy.writeSync(content);
       console.log(chalk.white.bgGreen("Code copied into clipboard"));
     } else {
-      createFile(userConfig.components + "/" + fileName, content);
+      if (!fileName.startsWith("/")) {
+        fileName = "/" + fileName;
+      }
+      createFile(fileName, content);
     }
   } catch (err) {
     console.error(chalk.red(err.message));
